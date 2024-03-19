@@ -1,27 +1,33 @@
+// Imported react components for Vibrations.
 import React from 'react';
 import {
     Button,
     Platform,
     Text,
-    Vibration,
+    Vibration, // If you are including vibrations just import this 
     View,
     SafeAreaView,
-    StyleSheet,
 } from 'react-native';
 
+// Import styles from AppStyles.js
+import { styles } from './styles/styles_page';
+
+// Separator component used to create space between elements
 const Separator = () => {
     return <View style={Platform.OS === 'android' ? styles.separator : null} />;
 };
 
-const App = () => {
-    const ONE_SECOND_IN_MS = 1000;
 
+const App = () => {
+    // Constants for vibration pattern
+    const ONE_SECOND_IN_MS = 1000;
     const PATTERN = [
         1 * ONE_SECOND_IN_MS,
         2 * ONE_SECOND_IN_MS,
         3 * ONE_SECOND_IN_MS,
     ];
 
+    // Description of the vibration pattern, varies by platform
     const PATTERN_DESC =
         Platform.OS === 'android'
             ? 'wait 1s, vibrate 2s, wait 3s'
@@ -34,17 +40,14 @@ const App = () => {
                 <Button title="Vibrate once" onPress={() => Vibration.vibrate()} />
             </View>
             <Separator />
-            {Platform.OS === 'android'
-                ? [
-                    <View>
-                        <Button
-                            title="Vibrate for 10 seconds"
-                            onPress={() => Vibration.vibrate(10 * ONE_SECOND_IN_MS)}
-                        />
-                    </View>,
-                    <Separator />,
-                ]
-                : null}
+            {Platform.OS === 'android' &&
+                [<View>
+                    <Button
+                        title="Vibrate for 10 seconds"
+                        onPress={() => Vibration.vibrate(10 * ONE_SECOND_IN_MS)}
+                    />
+                </View>,
+                <Separator />]}
             <Text style={styles.paragraph}>Pattern: {PATTERN_DESC}</Text>
             <Button
                 title="Vibrate with pattern"
@@ -65,27 +68,5 @@ const App = () => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingTop: 44,
-        padding: 8,
-    },
-    header: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    paragraph: {
-        margin: 24,
-        textAlign: 'center',
-    },
-    separator: {
-        marginVertical: 8,
-        borderBottomColor: '#737373',
-        borderBottomWidth: StyleSheet.hairlineWidth,
-    },
-});
 
 export default App;
