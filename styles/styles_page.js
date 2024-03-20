@@ -23,3 +23,5 @@ export const styles = StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
     },
 });
+
+// This is just really basic styles but you can add on more on what u may what to achieve on doing 
